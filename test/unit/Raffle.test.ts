@@ -62,6 +62,7 @@ import { Raffle, VRFCoordinatorV2Mock } from "../../typechain-types"
             })
             it("doesn't allow entrance when raffle is calculating", async () => {
                 await raffle.enterRaffle({ value: raffleEntranceFee })
+                // You have to mine a block AND increase time to get the raffle to calculating
                 await network.provider.send("evm_increaseTime", [interval + 1])
                 await network.provider.request({ method: "evm_mine", params: [] })
                 // we pretend to be a keeper for a second
